@@ -5,7 +5,7 @@
   
 ###### Note:
 
-The code is still incomplete. Currently, when single clicking a component on the build column, it only displays all editable texts.
+The code is still incomplete. Currently, when single clicking a component on the build column, it only displays all editable texts on the console.
 
 
 ###### To do:
