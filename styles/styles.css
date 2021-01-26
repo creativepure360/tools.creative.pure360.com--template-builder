@@ -1,0 +1,44 @@
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/* purgecss end ignore */
+
+@tailwind utilities;
+
+@layer base {
+
+    @font-face {
+        font-family: "Proxima Nova Regular";
+        font-weight: 400;
+        src: url('/fonts/ProximaNova-Regular.otf') format("opentype");
+    }
+    @font-face {
+        font-family: "Proxima Nova Bold";
+        font-weight: 700;
+        src: url('/fonts/ProximaNova-Bold.otf') format("opentype");
+    }
+    
+    @font-face {
+        font-family: "Avant Garde Pro Bold";
+        font-weight: 700;
+        src: url('/fonts/ITCAvantGardePro-Bold.otf') format("opentype");
+    }
+
+    ::selection {
+        background: #f0f;
+    }
+
+    body {
+        @apply font-proxima-regular;
+        @apply text-lg
+    }
+
+    strong {
+        @apply font-proxima-bold;
+    }
+
+    div.clone ~ div {
+        transform: none !important;
+    }
+
+  }
