@@ -1,10 +1,6 @@
 # Template Builder
 
 * Please use the query parameters `?profile=demo&id=demo` to view demo.
-  
-###### Note:
-
-This project is **FAR** from complete.
 
 ###### Current to do:
 
