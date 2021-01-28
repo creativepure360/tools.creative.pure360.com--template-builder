@@ -9,6 +9,7 @@ import Editor from "react-medium-editor";
 import Header from "../components/header/Header";
 import Main from "../components/main/Main";
 import Footer from "../components/footer/Footer";
+import { current } from "immer";
 
 const Index = ({ email }) => {
   const processEmail = () => {
@@ -25,7 +26,7 @@ const Index = ({ email }) => {
     });
   };
 
-  const reducer = (
+  const dragReducer = (
     draft,
     { type, sourceId, sourceIndex, destinationId, destinationIndex }
   ) => {
@@ -50,7 +51,7 @@ const Index = ({ email }) => {
 
   const data = processEmail();
 
-  const [state, dispatch] = useImmerReducer(reducer, {
+  const [state, dispatch] = useImmerReducer(dragReducer, {
     components: data,
     build: [],
   });
@@ -130,18 +131,19 @@ const Index = ({ email }) => {
     }
   };
 
+  const [currentId, setCurrentId] = useImmer("");
+
   const editComponent = (provided) => {
-
-    let markup = state.build.find(block => block.id == provided.draggableProps["data-rbd-draggable-id"]).markup;
-    
-    let parser = new DOMParser(),
-    parsedComponent = parser.parseFromString(markup, "text/html");
-
-    Array.from(parsedComponent.body.querySelectorAll('.customFont')).map(editables => console.log(editables.innerHTML));
-    
+    // Current ID of the component being edited.
+    setCurrentId(
+      (draft) => (draft = provided.draggableProps["data-rbd-draggable-id"])
+    );
+    console.log(currentId);
   };
 
-  const [text, setText] = useImmer('');
+  // const saveComponent = () => {
+  //   state.build.find((component) => component.id == currentId);
+  // };
 
   return (
     <>
@@ -246,7 +248,7 @@ const Index = ({ email }) => {
                     <div
                       {...provided.droppableProps}
                       ref={provided.innerRef}
-                      style={{ minHeight: "250px" }}
+                      style={{ minHeight: "400px" }}
                     >
                       <span className="font-avant-garde-bold text-xl text-red-200">
                         Drag &amp; Drop Here To Delete
@@ -259,14 +261,17 @@ const Index = ({ email }) => {
             </article>
           </section>
         </DragDropContext>
-        <section>
+        {/* <section>
           <Editor
+            className="max-w-full border-gray-300 border-4 rounded-lg p-2 mb-5"
             tag="pre"
-            text={text}
-            onChange={(text) => setText((draft) => (draft = text))}
-            options={{ toolbar: { buttons: ["bold", "italic", "underline"] } }}
+            text=""
+            onChange={() => {}}
+            options={{
+              toolbar: { buttons: ["bold", "italic", "underline", "anchor"] },
+            }}
           />
-        </section>
+        </section> */}
       </Main>
       <Footer />
     </>
