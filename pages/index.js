@@ -262,7 +262,7 @@ const Index = ({ email }) => {
           </section>
         </DragDropContext>
         {/* <section>
-          <Editor
+          <Editor 
             className="max-w-full border-gray-300 border-4 rounded-lg p-2 mb-5"
             tag="pre"
             text=""
